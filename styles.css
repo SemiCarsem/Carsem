@@ -3127,7 +3127,9 @@ h3 {
   }
 
   .product-view .gallery-benefits div {
+    aspect-ratio: auto;
     gap: 5px;
+    min-height: 112px;
     padding: 12px 8px;
   }
 
@@ -3137,11 +3139,23 @@ h3 {
   }
 
   .product-view .gallery-benefits div strong {
-    font-size: 0.82rem;
+    font-size: 0.76rem;
   }
 
   .product-view .gallery-benefits div span {
-    font-size: 0.68rem;
+    font-size: 0.64rem;
     line-height: 1.25;
+  }
+
+  .product-view .gallery-benefits div:first-child span {
+    max-width: 12ch;
+  }
+
+  .product-view .gallery-benefits div:nth-child(2) span {
+    max-width: 12ch;
+  }
+
+  .product-view .gallery-benefits div:nth-child(3) span {
+    max-width: 12ch;
   }
 }

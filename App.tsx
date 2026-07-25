@@ -2,7 +2,6 @@ import { type FormEvent, useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
-  Cable,
   Car,
   Check,
   ChevronLeft,
@@ -24,7 +23,6 @@ import {
   Star,
   Trash2,
   Truck,
-  Usb,
   Wifi,
   X,
   Zap
@@ -949,23 +947,6 @@ export default function App() {
                     <img src={image.src} alt="" />
                   </button>
                 ))}
-              </div>
-              <div className="gallery-benefits">
-                <div>
-                  <Cable size={30} />
-                  <strong>Avant</strong>
-                  <span>Câble à chaque trajet</span>
-                </div>
-                <div>
-                  <Wifi size={30} />
-                  <strong>Après</strong>
-                  <span>Sans-fil automatique</span>
-                </div>
-                <div>
-                  <Usb size={30} />
-                  <strong>Plug & Play</strong>
-                  <span>Branchez, appairez, partez</span>
-                </div>
               </div>
             </div>
 

@@ -3129,8 +3129,8 @@ h3 {
   .product-view .gallery-benefits div {
     aspect-ratio: auto;
     gap: 5px;
-    min-height: 112px;
-    padding: 12px 8px;
+    min-height: 86px;
+    padding: 10px 6px;
   }
 
   .product-view .gallery-benefits div svg {
@@ -3143,7 +3143,7 @@ h3 {
   }
 
   .product-view .gallery-benefits div span {
-    font-size: 0.64rem;
+    font-size: 0.62rem;
     line-height: 1.25;
   }
 

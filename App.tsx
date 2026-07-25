@@ -954,17 +954,17 @@ export default function App() {
                 <div>
                   <Cable size={30} />
                   <strong>Avant</strong>
-                  <span>Un câble obligatoire à chaque trajet</span>
+                  <span>Câble à chaque trajet</span>
                 </div>
                 <div>
                   <Wifi size={30} />
                   <strong>Après</strong>
-                  <span>Connexion sans-fil automatique</span>
+                  <span>Sans-fil automatique</span>
                 </div>
                 <div>
                   <Usb size={30} />
                   <strong>Plug & Play</strong>
-                  <span>Branchez sur le port USB d’origine</span>
+                  <span>Branchez, appairez, partez</span>
                 </div>
               </div>
             </div>

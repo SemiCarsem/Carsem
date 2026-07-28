@@ -3073,9 +3073,14 @@ h3 {
   }
 
   .product-view .buy-box {
-    order: -1;
+    order: 0;
     width: 100%;
     padding: 18px;
+  }
+
+  .product-view .gallery {
+    order: -1;
+    width: 100%;
   }
 
   .product-view .buy-box h2 {

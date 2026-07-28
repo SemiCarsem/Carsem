@@ -2,7 +2,6 @@ import { type FormEvent, useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
-  Cable,
   Car,
   Check,
   ChevronLeft,
@@ -24,7 +23,6 @@ import {
   Star,
   Trash2,
   Truck,
-  Usb,
   Wifi,
   X,
   Zap
@@ -646,6 +644,69 @@ function ProductsAdminPage() {
   );
 }
 
+function PasswordRecoveryPage({ onComplete }: { onComplete: () => void }) {
+  const [password, setPassword] = useState("");
+  const [confirmation, setConfirmation] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError("");
+    setMessage("");
+    if (password.length < 8) {
+      setError("Le mot de passe doit contenir au moins 8 caractères.");
+      return;
+    }
+    if (password !== confirmation) {
+      setError("Les deux mots de passe ne correspondent pas.");
+      return;
+    }
+    if (!supabase) {
+      setError("La connexion Supabase n’est pas configurée.");
+      return;
+    }
+    setSaving(true);
+    const { error: updateError } = await supabase.auth.updateUser({ password });
+    setSaving(false);
+    if (updateError) {
+      setError("Le lien est expiré ou a déjà été utilisé. Demande un nouveau lien.");
+      return;
+    }
+    setMessage("Mot de passe mis à jour. Tu peux maintenant te connecter à l’administration.");
+    window.history.replaceState({}, document.title, window.location.pathname);
+  };
+
+  return (
+    <main className="password-recovery-page">
+      <form className="password-recovery-card" onSubmit={handleSubmit}>
+        <img src="/assets/auryn/carsem-logo-mark.png" alt="" />
+        <p className="eyebrow">Accès sécurisé</p>
+        <h1>Nouveau mot de passe</h1>
+        <p>Choisis un nouveau mot de passe pour accéder à l’administration CarSem.</p>
+        <label>
+          Nouveau mot de passe
+          <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="new-password" minLength={8} required />
+        </label>
+        <label>
+          Confirmer le mot de passe
+          <input type="password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} autoComplete="new-password" minLength={8} required />
+        </label>
+        {error && <span className="login-error">{error}</span>}
+        {message && <span className="recovery-success">{message}</span>}
+        {message ? (
+          <button className="login-submit" type="button" onClick={onComplete}>Retour à la boutique</button>
+        ) : (
+          <button className="login-submit" type="submit" disabled={saving}>
+            {saving ? "Mise à jour..." : "Enregistrer le mot de passe"}
+          </button>
+        )}
+      </form>
+    </main>
+  );
+}
+
 export default function App() {
   const [selectedOffer, setSelectedOffer] = useState<OfferId>("solo");
   const [quantity, setQuantity] = useState(1);
@@ -658,6 +719,7 @@ export default function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [passwordRecovery, setPasswordRecovery] = useState(false);
   const offer = offers[selectedOffer];
 
   const galleryImages = [
@@ -712,15 +774,22 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    if (hashParams.get("type") === "recovery") setPasswordRecovery(true);
     if (!supabase) return;
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) setAdminLoggedIn(true);
     });
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY") setPasswordRecovery(true);
       setAdminLoggedIn(Boolean(session));
     });
     return () => listener.subscription.unsubscribe();
   }, []);
+
+  if (passwordRecovery) {
+    return <PasswordRecoveryPage onComplete={() => setPasswordRecovery(false)} />;
+  }
 
   if (page === "admin") {
     return <AdminPage onBack={async () => { await supabase?.auth.signOut(); setAdminLoggedIn(false); setPage("home"); }} />;
@@ -878,23 +947,6 @@ export default function App() {
                     <img src={image.src} alt="" />
                   </button>
                 ))}
-              </div>
-              <div className="gallery-benefits">
-                <div>
-                  <Cable size={30} />
-                  <strong>Avant</strong>
-                  <span>Un câble obligatoire à chaque trajet</span>
-                </div>
-                <div>
-                  <Wifi size={30} />
-                  <strong>Après</strong>
-                  <span>Connexion sans-fil automatique</span>
-                </div>
-                <div>
-                  <Usb size={30} />
-                  <strong>Plug & Play</strong>
-                  <span>Branchez sur le port USB d’origine</span>
-                </div>
               </div>
             </div>
 

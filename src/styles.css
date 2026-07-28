@@ -2596,6 +2596,10 @@ h3 {
   }
 }
 
+.gallery-benefits {
+  display: none !important;
+}
+
 /* Dark performance storefront redesign */
 :root {
   --ink: #f7fbff;
@@ -3058,5 +3062,104 @@ h3 {
 
   .hero-benefits span {
     width: 100%;
+  }
+
+  .product-view .product-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 18px;
+    padding-bottom: 56px;
+  }
+
+  .product-view .buy-box {
+    order: -1;
+    width: 100%;
+    padding: 18px;
+  }
+
+  .product-view .buy-box h2 {
+    margin-bottom: 8px;
+    font-size: 2rem;
+  }
+
+  .product-view .buy-intro {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .product-view .offer-list {
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .product-view .offer-card {
+    min-height: 72px;
+    gap: 10px;
+    padding: 12px 13px;
+  }
+
+  .product-view .offer-card strong {
+    font-size: 0.94rem;
+  }
+
+  .product-view .offer-card small {
+    max-width: 22ch;
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+
+  .product-view .offer-price b {
+    font-size: 1rem;
+  }
+
+  .product-view .included {
+    gap: 5px;
+    padding: 12px 14px;
+  }
+
+  .product-view .included p {
+    font-size: 0.84rem;
+  }
+
+  .product-view .quantity-row {
+    margin: 16px 0 10px;
+  }
+
+  .product-view .gallery-benefits {
+    gap: 8px;
+  }
+
+  .product-view .gallery-benefits div {
+    aspect-ratio: auto;
+    gap: 5px;
+    min-height: 86px;
+    padding: 10px 6px;
+  }
+
+  .product-view .gallery-benefits div svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .product-view .gallery-benefits div strong {
+    font-size: 0.76rem;
+  }
+
+  .product-view .gallery-benefits div span {
+    font-size: 0.62rem;
+    line-height: 1.25;
+  }
+
+  .product-view .gallery-benefits div:first-child span {
+    max-width: 12ch;
+  }
+
+  .product-view .gallery-benefits div:nth-child(2) span {
+    max-width: 12ch;
+  }
+
+  .product-view .gallery-benefits div:nth-child(3) span {
+    max-width: 12ch;
   }
 }
